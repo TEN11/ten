@@ -24,6 +24,12 @@ public abstract class BaseFragment extends Fragment {
         return layout;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initView();
+    }
+
     protected abstract int getLayoutID();
 
     protected abstract void initView();

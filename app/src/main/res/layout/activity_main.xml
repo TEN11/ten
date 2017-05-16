@@ -16,6 +16,7 @@
         ></FrameLayout>
 
     <RadioGroup
+        android:id="@+id/main_rg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -30,6 +31,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/movie_selector"
+
             />
         <RadioButton
             android:id="@+id/main_artical"
