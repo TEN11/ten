@@ -7,11 +7,8 @@ import android.widget.ImageView;
 import com.example.ayou.ten.R;
 import com.example.ayou.ten.adapter.MovieAdapter;
 import com.example.ayou.ten.bean.MovieBean;
-import com.example.ayou.ten.bean.MovieContentBean;
+import com.example.ayou.ten.utils.PagingScrollHelper;
 import com.example.ayou.ten.utils.RetrofitUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,11 +24,11 @@ public class MovieFragment extends BaseFragment {
     private ImageView mWeek;
     private ImageView mMonth;
     private RecyclerView mRv;
-
-
     private MovieAdapter adapter;
-    private List<MovieContentBean> data;
-    private List<MovieBean.ResultBean> movieData = new ArrayList<>();
+
+    //横向分页滑动
+    private PagingScrollHelper scrollHelper = new PagingScrollHelper();
+    private LinearLayoutManager hLinearLayoutManager = null;
 
     @Override
     protected int getLayoutID() {
@@ -46,15 +43,26 @@ public class MovieFragment extends BaseFragment {
         mMonth = (ImageView) findViewById(R.id.movie_month);
         mRv = (RecyclerView) findViewById(R.id.movie_rv);
 
+        hLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         adapter = new MovieAdapter(getActivity(),null);
-        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mRv.setLayoutManager(manager);
         mRv.setAdapter(adapter);
-
-
+        //分页横向滑动
+        scrollHelper.setUpRecycleView(mRv);
+        RecyclerView.LayoutManager layoutManager = hLinearLayoutManager;
+        if (layoutManager != null) {
+            mRv.setLayoutManager(layoutManager);
+            scrollHelper.updateLayoutManger();
+        }
         initMovieData();
 
+
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private void initMovieData() {
@@ -63,8 +71,9 @@ public class MovieFragment extends BaseFragment {
             @Override
             public void onResponse(Call<MovieBean> call, Response<MovieBean> response) {
                 MovieBean body = response.body();
-                movieData.addAll(body.getResult());
-                initContentData(movieData);
+                if (body!=null){
+                    adapter.addRes(body.getResult());
+                }
             }
 
             @Override
@@ -75,31 +84,7 @@ public class MovieFragment extends BaseFragment {
 
     }
 
-    private void initContentData(List<MovieBean.ResultBean> movieData) {
-        for (int i = 0; i < movieData.size(); i++) {
-            int id = movieData.get(i).getId();
 
-            initContent(id);
-
-        }
-    }
-
-    private void initContent(int id) {
-        Call<MovieContentBean> call = RetrofitUtils.getNet().getMovieContentData(id);
-        call.enqueue(new Callback<MovieContentBean>() {
-            @Override
-            public void onResponse(Call<MovieContentBean> call, Response<MovieContentBean> response) {
-                MovieContentBean body = response.body();
-                adapter.addRes(body);
-
-            }
-
-            @Override
-            public void onFailure(Call<MovieContentBean> call, Throwable t) {
-
-            }
-        });
-    }
 
 
 }

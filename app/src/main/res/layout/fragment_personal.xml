@@ -2,7 +2,110 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#001"
     android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@color/colorRed">
+
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/avator_whiteline" />
+
+        <ImageView
+            android:id="@+id/personal_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/avator_login" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:text="点击用QQ登录"
+            android:textColor="@color/colorWhite" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/personal_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:drawableEnd="@mipmap/setting_arrow"
+        android:drawablePadding="10dp"
+        android:drawableStart="@mipmap/setting_favorite"
+        android:gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:text="我的收藏"
+        android:textColor="@color/colorBlack" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/colorGray9" />
+
+    <TextView
+        android:id="@+id/personal_font"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:drawableEnd="@mipmap/setting_arrow"
+        android:drawablePadding="10dp"
+        android:drawableStart="@mipmap/setting_font"
+        android:gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:text="字体设置"
+        android:textColor="@color/colorBlack" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/colorGray9" />
+
+    <TextView
+        android:id="@+id/personal_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:drawableEnd="@mipmap/setting_arrow"
+        android:drawablePadding="10dp"
+        android:drawableStart="@mipmap/setting_aboutus"
+        android:gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:text="关于十个"
+        android:textColor="@color/colorBlack" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/colorGray9" />
+
+    <TextView
+        android:id="@+id/personal_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:drawableEnd="@mipmap/setting_arrow"
+        android:drawablePadding="10dp"
+        android:drawableStart="@mipmap/setting_feedback"
+        android:gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:text="意见反馈"
+        android:textColor="@color/colorBlack" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/colorGray9" />
+
 
 </LinearLayout>

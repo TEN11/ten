@@ -4,13 +4,21 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.ayou.ten.Event.EventConfig;
+import com.example.ayou.ten.Event.HideEvent;
 import com.example.ayou.ten.fragment.ActrialFragment;
 import com.example.ayou.ten.fragment.MovieFragment;
 import com.example.ayou.ten.fragment.PersonalFragment;
 import com.example.ayou.ten.fragment.PicFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +35,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     RadioButton mainPersonal;
     @BindView(R.id.main_rg)
     RadioGroup mainRg;
+    @BindView(R.id.main_fenxiang)
+    ImageView mainFenxiang;
 
     private FragmentManager manager;
     private FragmentTransaction transaction;
@@ -73,6 +83,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 } else {
                     transaction.show(movieFragment);
                 }
+                mainFenxiang.setVisibility(View.VISIBLE);
                 break;
             case R.id.main_artical:
                 if (actrialFragment == null) {
@@ -81,6 +92,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 } else {
                     transaction.show(actrialFragment);
                 }
+                mainFenxiang.setVisibility(View.VISIBLE);
                 break;
             case R.id.main_pic:
                 if (picFragment == null) {
@@ -89,6 +101,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 } else {
                     transaction.show(picFragment);
                 }
+                mainFenxiang.setVisibility(View.VISIBLE);
                 break;
             case R.id.main_personal:
                 if (personalFragment == null) {
@@ -97,8 +110,36 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 } else {
                     transaction.show(personalFragment);
                 }
+                mainFenxiang.setVisibility(View.GONE );
                 break;
         }
         transaction.commit();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void TabHide(HideEvent event){
+        if (event.WHAT == EventConfig.IS_HIDE){
+            boolean up = event.isUP();
+            if (up){//向上滑 隐藏底部tab 和 分享按钮
+                mainRg.setVisibility(View.GONE);
+                mainFenxiang.setVisibility(View.GONE);
+            }else {
+                mainRg.setVisibility(View.VISIBLE);
+                mainFenxiang.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
 }

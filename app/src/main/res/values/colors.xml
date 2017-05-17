@@ -6,8 +6,9 @@
 
     <color name="colorBlack">#000</color>
     <color name="colorWhite">#fff</color>
-    <color name="colorGray6">#666</color>
-    <color name="colorGray3">#333</color>
-    <color name="colorGray9">#00eae8e8</color>
+    <color name="colorGray6">#a1a1a1</color>
+    <color name="colorGray3">#1e1e1e</color>
+    <color name="colorGray9">#f4f2f2</color>
+    <color name="colorRed">#d14343</color>
 
 </resources>
