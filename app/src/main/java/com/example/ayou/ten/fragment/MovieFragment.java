@@ -28,7 +28,6 @@ public class MovieFragment extends BaseFragment {
 
     //横向分页滑动
     private PagingScrollHelper scrollHelper = new PagingScrollHelper();
-    private LinearLayoutManager hLinearLayoutManager = null;
 
     @Override
     protected int getLayoutID() {
@@ -43,26 +42,15 @@ public class MovieFragment extends BaseFragment {
         mMonth = (ImageView) findViewById(R.id.movie_month);
         mRv = (RecyclerView) findViewById(R.id.movie_rv);
 
-        hLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        adapter = new MovieAdapter(getActivity(),null);
+        adapter = new MovieAdapter(getActivity(), null);
         mRv.setAdapter(adapter);
+        mRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         //分页横向滑动
         scrollHelper.setUpRecycleView(mRv);
-        RecyclerView.LayoutManager layoutManager = hLinearLayoutManager;
-        if (layoutManager != null) {
-            mRv.setLayoutManager(layoutManager);
-            scrollHelper.updateLayoutManger();
-        }
+        scrollHelper.updateLayoutManger();
+
         initMovieData();
 
-
-
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     private void initMovieData() {
@@ -71,7 +59,7 @@ public class MovieFragment extends BaseFragment {
             @Override
             public void onResponse(Call<MovieBean> call, Response<MovieBean> response) {
                 MovieBean body = response.body();
-                if (body!=null){
+                if (body != null) {
                     adapter.addRes(body.getResult());
                 }
             }
@@ -83,8 +71,6 @@ public class MovieFragment extends BaseFragment {
         });
 
     }
-
-
 
 
 }

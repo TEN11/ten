@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ayou.ten.fragment.FontActivity">
+
+    <RelativeLayout
+        android:id="@+id/font_rl"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/colorGray9">
+
+        <ImageView
+            android:id="@+id/font_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="字体设置"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/font_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/font_rl"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="60dp"
+        android:text="我已经老了，在人来人往的大厅，有一位老人他向我走来，他说我认识你，那时的你还很年轻，美丽，你的身边有许许多多的追求者，不过跟那时相比，我更喜欢现在你这经历了沧桑的容颜？"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/font_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:text="-《情人》" />
+
+    <RadioGroup
+        android:id="@+id/font_rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/font_rbs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/font_small_selector"
+            android:gravity="center_horizontal"
+            android:text="眼神儿好" />
+
+        <RadioButton
+            android:id="@+id/font_rbm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/font_middle_selector"
+            android:gravity="center_horizontal"
+            android:text="不大不小" />
+
+        <RadioButton
+            android:id="@+id/font_rbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/font_large_selector"
+            android:gravity="center_horizontal"
+            android:text="我要大大" />
+
+
+    </RadioGroup>
+
+
+</RelativeLayout>

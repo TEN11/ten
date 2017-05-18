@@ -26,13 +26,10 @@ public class ActrialFragment extends BaseFragment {
     private ImageView mMonth;
     private RecyclerView mRv;
     private ActrialAdapter adapter;
-//    private List<actrialContentBean> data;
-//    private List<actrialBean.ResultBean> actrialData = new ArrayList<>();
 
     //横向分页滑动
     private PagingScrollHelper scrollHelper = new PagingScrollHelper();
-    private LinearLayoutManager hLinearLayoutManager = null;
-    
+
     @Override
     protected int getLayoutID() {
         return R.layout.fragment_artical;
@@ -47,21 +44,17 @@ public class ActrialFragment extends BaseFragment {
         mMonth = (ImageView) findViewById(R.id.actrial_month);
         mRv = (RecyclerView) findViewById(R.id.actrial_rv);
 
-        hLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        adapter = new ActrialAdapter(getActivity(),null);
+        adapter = new ActrialAdapter(getActivity(), null);
         mRv.setAdapter(adapter);
+        mRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         //分页横向滑动
         scrollHelper.setUpRecycleView(mRv);
-        RecyclerView.LayoutManager layoutManager = hLinearLayoutManager;
-        if (layoutManager != null) {
-            mRv.setLayoutManager(layoutManager);
-            scrollHelper.updateLayoutManger();
-        }
 
         initData();
 
-        
+
     }
+
     //获取美文数据
     private void initData() {
         Call<ActrialBean> call = RetrofitUtils.getNet().getActrialData();
@@ -77,10 +70,5 @@ public class ActrialFragment extends BaseFragment {
 
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 }

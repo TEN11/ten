@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
+    <com.example.ayou.ten.utils.ObservableScrollView
+        android:id="@+id/pic_sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -71,6 +72,6 @@
                 android:text="一生的学习" />
 
         </LinearLayout>
-    </ScrollView>
+    </com.example.ayou.ten.utils.ObservableScrollView>
 
 </LinearLayout>

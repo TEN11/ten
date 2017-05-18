@@ -49,13 +49,9 @@ public class PicFragment extends BaseFragment {
         hLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         adapter = new PicAdapter(getActivity(),null);
         mRv.setAdapter(adapter);
+        mRv.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         //分页横向滑动
         scrollHelper.setUpRecycleView(mRv);
-        RecyclerView.LayoutManager layoutManager = hLinearLayoutManager;
-        if (layoutManager != null) {
-            mRv.setLayoutManager(layoutManager);
-            scrollHelper.updateLayoutManger();
-        }
         initData();
     }
 
@@ -69,17 +65,11 @@ public class PicFragment extends BaseFragment {
                     adapter.addRes(body.getResult());
                 }
             }
-
             @Override
             public void onFailure(Call<PicBean> call, Throwable t) {
 
             }
         });
-
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 }

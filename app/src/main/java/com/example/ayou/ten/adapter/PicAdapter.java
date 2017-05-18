@@ -2,18 +2,24 @@ package com.example.ayou.ten.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ayou.ten.Event.EventConfig;
+import com.example.ayou.ten.Event.HideEvent;
 import com.example.ayou.ten.R;
 import com.example.ayou.ten.bean.PicBean;
 import com.example.ayou.ten.bean.PicContentBean;
 import com.example.ayou.ten.config.NetConfig;
+import com.example.ayou.ten.utils.ObservableScrollView;
 import com.example.ayou.ten.utils.RetrofitUtils;
 import com.squareup.picasso.Picasso;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +34,7 @@ import retrofit2.Response;
  * Created by AYOU on 2017/5/17.
  */
 
-public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
+public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> implements View.OnScrollChangeListener {
 
     private List<PicBean.ResultBean> data;
     private List<PicContentBean> picData;
@@ -87,6 +93,9 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
             }
         });
 
+        holder.picSv.setScrollViewChangeListener(this);
+
+
     }
 
     @Override
@@ -94,8 +103,16 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
         return data == null ? 0 : data.size();
     }
 
+    @Override
+    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+        Log.i("jzq", "scrollY=="+scrollY+"oldScrollY=="+oldScrollY);
+        HideEvent event = new HideEvent(EventConfig.IS_HIDE);
+        //向上滑  oldScrollY < scrollY  true
+        //向下滑  oldScrollY > scrollY  false
+        event.setUP(oldScrollY<scrollY);
+        EventBus.getDefault().post(event);
+    }
 
-    static
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.pic_item_img)
@@ -108,7 +125,8 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
         TextView picItemText;
         @BindView(R.id.pic_item_text2)
         TextView picItemText2;
-
+        @BindView(R.id.pic_sv)
+        ObservableScrollView picSv;
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

@@ -7,5 +7,6 @@ package com.example.ayou.ten.Event;
 public class EventConfig {
 
     public static final int IS_HIDE = 1;
+    public static final int FONT = 2;
 
 }

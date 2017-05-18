@@ -128,8 +128,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
 
     }
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.movie_item_imgTop)
         ImageView movieItemImgTop;
